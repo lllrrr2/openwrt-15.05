@@ -176,11 +176,11 @@ function getxmlyaudios(){
 }
 
 if [ ! $(uci get autodl.@autodl[0].xmlygetpages) ];then
-	paudiourl=$(uci get autodl.@autodl[0].xmlyurl)
+	paudiourl=$(uci get autodl.@autodl[0].xmlyurl | sed "s/\/$//")
 	getxmlyaudios
 else
 	uci get autodl.@autodl[0].xmlyurl > /tmp/doxmly.seturl.tmp
-	xmlypagesendcount=$(uci get autodl.@autodl[0].xmlygetpages)
+	xmlypagesendcount=$(uci get autodl.@autodl[0].xmlygetpages | sed "s/\/$//")
 	xmlypagescount=0
 	if [ ! $(uci get autodl.@autodl[0].xmlyurl | cut -d "/" -f 6 | sed 's/p//') ];then
 		paudiourlstartpage=1
